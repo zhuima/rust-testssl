@@ -1,4 +1,4 @@
-use crate::scanner::tls_scanner::TlsVersionInfo;
+use crate::scanner::network::tls_scanner::TlsVersionInfo;
 
 pub fn print_tls_scan_result(results: &Vec<TlsVersionInfo>) {
     println!("\nTesting server's cipher preferences");

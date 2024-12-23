@@ -2,13 +2,13 @@ use clap::Parser;
 use anyhow::Result;
 use rust_testssl::{
     scanner::{
-        tls_scanner::TlsScanner,
-        http_scanner::HttpScanner,
-        client_simulation::ClientSimulator,
-        dns_scanner::DnsScanner,
-        vulnerability_scanner::VulnerabilityScanner,
-        forward_secrecy_scanner::ForwardSecrecyScanner,
-        server_defaults_scanner::ServerDefaultsScanner,
+        network::tls_scanner::TlsScanner,
+        network::http_scanner::HttpScanner,
+        simulation::client_simulation::ClientSimulator,
+        network::dns_scanner::DnsScanner,
+        security::vulnerability_scanner::VulnerabilityScanner,
+        tls::forward_secrecy_scanner::ForwardSecrecyScanner,
+        tls::server_defaults_scanner::ServerDefaultsScanner,
     },
     rating::SslRating,
     output,
