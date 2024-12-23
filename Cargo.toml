@@ -1,0 +1,22 @@
+[package]
+name = "rust-testssl"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.x", features = ["derive"] }
+tokio = { version = "1.x", features = ["full"] }
+anyhow = "1"
+native-tls = "0.2"
+tokio-native-tls = "0.3"
+reqwest = { version = "0.12.9", features = ["rustls-tls"] } # 添加 reqwest 依赖
+rustls = { version = "0.21", features = ["dangerous_configuration"] }
+tokio-rustls = "0.24"
+x509-parser = "0.15"
+webpki-roots = "0.25"
+webpki = "0.22"
+chrono = "0.4"
+colored = "2.0"
+trust-dns-resolver = "0.22"
+sha2 = "0.10"
+sha1 = "0.10"
