@@ -6,100 +6,106 @@ A Rust implementation of the popular [testssl.sh](https://github.com/drwetter/te
 
 ```
 src/
-├── certificates/     # 证书分析模块
-├── ciphers/         # 密码套件测试模块
-├── protocols/       # 协议支持检测模块
-├── vulnerabilities/ # 漏洞检测模块
-├── scanner/         # 核心扫描功能
-│   ├── mod.rs
-│   ├── tls_scanner.rs
-│   ├── server_defaults_scanner.rs
-│   └── forward_secrecy_scanner.rs
-├── errors.rs        # 错误处理
-├── output.rs        # 输出格式化
-└── main.rs          # 程序入口
+├── errors.rs              # Error handling
+├── lib.rs                 # Library entry
+├── main.rs                # Main program entry
+├── output.rs              # Output formatting
+├── rating.rs              # Rating system
+├── scanner/               # Core scanning functionality
+│   ├── network/          # Network-related scanning
+│   │   ├── dns_scanner.rs
+│   │   ├── http_scanner.rs
+│   │   ├── mod.rs
+│   │   └── tls_scanner.rs
+│   ├── security/         # Security-related scanning
+│   │   ├── mod.rs
+│   │   └── vulnerability_scanner.rs
+│   ├── simulation/       # Client simulation
+│   │   ├── mod.rs
+│   │   └── client_simulation.rs
+│   ├── tls/             # TLS-related scanning
+│   │   ├── forward_secrecy_scanner.rs
+│   │   ├── mod.rs
+│   │   └── server_defaults_scanner.rs
+│   └── mod.rs
 ```
 
-## Modules
+## Core Components
 
-### certificates
-证书分析模块，负责：
-- 证书链验证
-- 证书信息提取
-- OCSP 状态检查
-- CT 日志检查
+### Network Scanning (scanner/network/)
+- **DNS Scanner**: Domain resolution and DNS record checks
+- **HTTP Scanner**: HTTP security headers inspection
+- **TLS Scanner**: TLS protocol versions and configuration checks
 
-### ciphers
-密码套件测试模块，包含：
-- 支持的密码套件检测
-- 密码套件优先级分析
-- 密钥交换算法测试
+### Security Scanning (scanner/security/)
+- **Vulnerability Scanner**: Detection of common SSL/TLS vulnerabilities
+  - Heartbleed
+  - CCS Injection
+  - ROBOT
+  - BEAST
+  - POODLE
+  - And more...
 
-### protocols
-协议支持检测模块，实现：
-- TLS/SSL 版本支持检测
-- 协议降级保护检查
-- 协议扩展支持分析
+### TLS Scanning (scanner/tls/)
+- **Forward Secrecy Scanner**: Tests for forward secrecy support
+  - Cipher suite analysis
+  - Key exchange algorithms
+  - Signature algorithms
+  - Elliptic curves support
 
-### vulnerabilities
-漏洞检测模块，用于：
-- 已知 TLS/SSL 漏洞检测
-- 安全配置评估
-- 最佳实践检查
+- **Server Defaults Scanner**: Checks server configuration
+  - TLS extensions
+  - Session resumption
+  - Certificate details
+  - OCSP stapling
+  - Certificate transparency
 
-### scanner
-核心扫描功能模块：
-- TLS 连接建立
-- 服务器配置分析
-- 前向安全性测试
+### Client Simulation (scanner/simulation/)
+- Simulates various client behaviors
+- Tests compatibility with different browsers and platforms
+- Checks protocol and cipher suite negotiations
 
-## Key Components
+## Supporting Modules
 
-### ServerDefaultsScanner
-服务器默认配置扫描器，检测：
-- TLS 扩展支持
-- 会话恢复能力
-- 证书压缩支持
-- 时钟偏差
+### certificates/
+- Certificate chain validation
+- Certificate information extraction
+- OCSP status checking
+- CT log verification
 
-### TlsScanner
-TLS 协议扫描器，负责：
-- 协议版本协商
-- 密码套件选择
-- 证书链获取
+### ciphers/
+- Cipher suite detection
+- Priority analysis
+- Key exchange algorithm testing
 
-### ForwardSecrecyScanner
-前向安全性扫描器，测试：
-- 密钥交换算法
-- 签名算法支持
-- 椭圆曲线支持
+### protocols/
+- TLS/SSL version support detection
+- Protocol downgrade protection
+- Protocol extension analysis
 
-## Output Format
-
-输出示例：
-```
-Testing server defaults (Server Hello)
-_____________________________________
-
-TLS extensions (standard)      renegotiation info/#65281
-Session Ticket RFC 5077 hint   7200 seconds
-SSL Session ID support         yes
-Session Resumption            Tickets: yes, ID: yes
-...
-```
+### rating/
+- Security scoring system
+- Configuration assessment
+- Best practices evaluation
 
 ## Development Status
 
-- [x] 基础框架搭建
-- [x] TLS 连接建立
-- [x] 证书分析
-- [ ] 密码套件测试
-- [ ] 漏洞扫描
-- [ ] 完整性测试
+- [x] Basic framework
+- [x] TLS connection establishment
+- [x] Certificate analysis
+- [x] Client simulation
+- [x] DNS scanning
+- [x] HTTP security headers
+- [ ] Complete vulnerability scanning
+- [ ] Comprehensive testing
 
 ## Contributing
 
-1. 遵循 Rust 编码规范
-2. 添加必要的测试用例
-3. 更新相关文档
-4. 提交 PR 前进行本地测试
+1. Follow Rust coding standards
+2. Add necessary test cases
+3. Update relevant documentation
+4. Test locally before submitting PR
+
+## License
+
+MIT
